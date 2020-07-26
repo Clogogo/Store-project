@@ -76,8 +76,9 @@ public class StoreBasket {
 
 
     public Item findAndAddItem(String itemName, int quantity) {
-        itemQuantity = quantity;
+
         try {
+            itemQuantity = quantity;
             InitialsOfItems initials = new InitialsOfItems();
             myBasketList = new ArrayList<>();
 
@@ -151,63 +152,12 @@ public class StoreBasket {
     }
 
 
-//    public void showMyBasket() {
-//        if (myBasketList.size() == 0) {
-//            System.out.println("Cart Empty");
-//            return;
-//        }
-//        Iterator<Item> iterator = myBasketList.iterator();
-//        int basketIndex = 1;
-//        while (iterator.hasNext()) {
-//            Item element = iterator.next();
-//            if (element instanceof ItemWithDiscount) {
-//                if (((ItemWithDiscount) element).getCount() != 0) {
-//                    System.out.println("printing a basket");
-//                    System.out.println(" " + basketIndex);
-//                    ((ItemWithDiscount) element).printInfo();
-//                    basketIndex++;
-//                }
-//            }
-//            if (element instanceof ItemBuyMorePayless) {
-//                if (((ItemBuyMorePayless) element).getCount() != 0) {
-//                    System.out.println("printing a basket");
-//                    System.out.println(" " + basketIndex);
-//                    ((ItemBuyMorePayless) element).printInfo();
-//                    basketIndex++;
-//                }
-//
-//            }
-//            if (element instanceof ItemTakeItAll) {
-//                if (((ItemTakeItAll) element).getCount() != 0) {
-//                    System.out.println("printing a basket");
-//                    System.out.println(" " + basketIndex);
-//                    ((ItemTakeItAll) element).printInfo();
-//                    basketIndex++;
-//                }
-//
-//            }
-//            if (element instanceof ItemWithNODiscount) {
-//                if (((ItemWithNODiscount) element).getCount() != 0) {
-//                    System.out.println("printing a basket");
-//                    System.out.println(" " + basketIndex);
-//                    ((ItemWithNODiscount) element).printInfo();
-//                    basketIndex++;
-//                }
-//
-//            }
-//
-//        }
-//        System.out.println(myBasketList.size());
-//    }
-
-
     public void setNetAmount(double netAmount) {
         this.netAmount = netAmount;
     }
 
 
     public double getNetAmount() {
-
 
         return netAmount;
     }

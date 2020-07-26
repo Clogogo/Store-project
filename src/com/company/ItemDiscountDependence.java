@@ -3,8 +3,8 @@ package com.company;
 public class ItemDiscountDependence extends Item implements calculate {
     private int discountDependence = 200;
     private int discount;
-    private int quantity = new StoreBasket().getItemQuantity();;
-
+    private int quantity = new StoreBasket().getItemQuantity();
+    ;
 
 
     public ItemDiscountDependence(String name, double price) {
@@ -15,9 +15,7 @@ public class ItemDiscountDependence extends Item implements calculate {
 
     public ItemDiscountDependence() {
     }
-    public ItemDiscountDependence(int discountDependence) {
-        this.discountDependence = discountDependence;
-    }
+
 
     public int getDiscount() {
         return discount;
@@ -28,13 +26,20 @@ public class ItemDiscountDependence extends Item implements calculate {
     }
 
 
-
     public int getDiscountDependence() {
         return discountDependence;
     }
 
     public void setDiscountDependence(int discountDependence) {
         this.discountDependence = discountDependence;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -45,6 +50,6 @@ public class ItemDiscountDependence extends Item implements calculate {
 
     @Override
     public void printInfo() {
-        System.out.println("Name: " + getName() + "\nPrice: " + getPrice() + "\nDiscounted Price: " + calculateDiscount());
+        System.out.println("Name: " + getName() + "\nPrice: " + getPrice() + "\nQuatity: " + getQuantity() + "\nDiscounted Price: " + calculateDiscount());
     }
 }

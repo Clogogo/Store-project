@@ -11,13 +11,6 @@ public class ItemBuyMorePayless extends Item implements calculate {
         super(name, price);
     }
 
-    public ItemBuyMorePayless(int payLimitQuatity, int bonus) {
-        this.payLimitQuatity = payLimitQuatity;
-        this.bonus = bonus;
-
-    }
-
-    ;
 
     public ItemBuyMorePayless() {
     }
@@ -71,6 +64,6 @@ public class ItemBuyMorePayless extends Item implements calculate {
 
     @Override
     public void printInfo() {
-        System.out.println("Name: " + getName() + "\nPrice: " + getPrice() + "\nDiscounted Price: " + calculateDiscount());
+        System.out.println("Name: " + getName() + "\nPrice: " + getPrice() + "\nQuatity: " + getQuantity() + "\nDiscounted Price: " + calculateDiscount());
     }
 }

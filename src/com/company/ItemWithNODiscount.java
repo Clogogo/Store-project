@@ -24,7 +24,7 @@ public class ItemWithNODiscount extends Item implements calculate {
 
     @Override
     public void printInfo() {
-        System.out.println("Name: "+ getName() + "\nPrice: " + getPrice() + "\nDiscounted Price: " +calculateDiscount() );
+        System.out.println("Name: " + getName() + "\nPrice: " + getPrice() + "\nQuatity: " + getQuantity() + "\nDiscounted Price: " + calculateDiscount());
     }
 
 }

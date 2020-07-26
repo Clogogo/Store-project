@@ -14,11 +14,6 @@ public class ItemWithDiscount extends Item implements calculate{
 
     public ItemWithDiscount(){};
 
-    public ItemWithDiscount(int discount){
-        this.discount = discount;
-    };
-
-
     public int getDiscount() {
         return discount;
     }
@@ -31,10 +26,6 @@ public class ItemWithDiscount extends Item implements calculate{
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     @Override
     public double calculateDiscount() {
         return getQuantity() * (getPrice()-getDiscount());
@@ -42,6 +33,6 @@ public class ItemWithDiscount extends Item implements calculate{
 
     @Override
     public void printInfo() {
-        System.out.println("Name: "+ getName() + "\nPrice: " + getPrice() + "\nDiscounted Price: " + calculateDiscount());
+        System.out.println("Name: " + getName() + "\nPrice: " + getPrice() + "\nQuatity: " + getQuantity() + "\nDiscounted Price: " + calculateDiscount());
     }
 }

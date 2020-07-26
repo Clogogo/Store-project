@@ -2,18 +2,23 @@ package com.company;
 
 import java.io.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
     //Save each item into a basket
     static List<Item> basket = new ArrayList<>();
 
-    //User login time
+    //User login user
     static List<User> loginUsers = new ArrayList<>();
-    static Map<String, String> loginUsersTime = new HashMap<>();
+
+    //Login time
+    static List<String> loginTime = new ArrayList<>();
+
 
     // unique Map<basketUniqueid, basket>
     static Map<Integer, List<Item>> linkBasket = new HashMap<>();
@@ -61,7 +66,6 @@ public class Main {
                     if (element instanceof UserManager || element instanceof UserCashier) {
                         if (element.getUserName().equals(userName) && element.getPassWord() == passWord) {
                             loginUsers.add(element);
-                            System.out.println("User Found ");
                             return true;
                         }
                     }
@@ -74,17 +78,18 @@ public class Main {
     }
 
     //Time for login
-    public static String timeLogin() {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy:HH:mm:ss");
+    public static String time() {
+        DateFormat dateFormat = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
         Date date = new Date();
         String dateStr = dateFormat.format(date);
+        loginTime.add(dateStr);
         return dateStr;
     }
 
 
     //Cashier Login
     public static void user() {
-        new UserCashier().login();
+
 
         boolean result = true;
         while (result) {
@@ -97,7 +102,7 @@ public class Main {
                 if (authentication(userName, password)) {
                     result = false;
                     System.out.println("**********Welcome**********");
-                    System.out.println(" Login Time: " + timeLogin());
+                    System.out.println(" Login Time: " + time());
                     cashierFunction();
                 } else {
                     System.out.println("****Invalid username or password! Please Try Again****");
@@ -125,7 +130,7 @@ public class Main {
                     if (element.getUserName().equals(userName) && ((UserManager) element).getPinCode() == pin) {
                         loginUsers.add(element);
                         System.out.println("Welcome: \n" + element.getFirstName() + "  " + element.getLastName());
-                        System.out.println(" Login Time:" + timeLogin());
+                        System.out.println(" Login Time:" + time());
                         managerFunction();
                     } else {
                         System.out.println("Wrong pin");
@@ -164,15 +169,15 @@ public class Main {
                     discount = input.nextInt();
                     new ItemWithDiscount().setDiscount(discount);
                 } else if (pickToChange == 2) {
-                    System.out.println("Enter Discount Independence");
+                    System.out.print("Enter Discount Independence");
                     discount = input.nextInt();
                     new ItemDiscountDependence().setDiscountDependence(discount);
                 } else if (pickToChange == 3) {
-                    System.out.println("Enter BuyMorePayless Discount");
+                    System.out.print("Enter BuyMorePayless Discount");
                     discount = input.nextInt();
                     new ItemBuyMorePayless().setPayLimit(discount);
                 } else if (pickToChange == 4) {
-                    System.out.println("Enter ItemTakeItAll Discount");
+                    System.out.print("Enter ItemTakeItAll Discount");
                     discount = input.nextInt();
                     new ItemTakeItAll().setNumberOfItems(discount);
                 } else {
@@ -203,40 +208,50 @@ public class Main {
             while (result) {
                 System.out.println("********************");
                 cashierMenu();
+                System.out.println("********************");
                 System.out.print("Enter>> ");
                 int selectedNumber = input.nextInt();
+                System.out.println("*******************");
                 //create unique backet Id
                 if (selectedNumber == 1) {
-                    System.out.println("\n1 for Simple Customer \n2 for Loyal Customer \n3 for Employee Customer");
+                    System.out.println("\n1 for Simple Customer \n2 for Loyal Customer \n3 for Employee Customer \n");
                     System.out.print("Enter>> ");
+
                     int selectedCustomer = input.nextInt();
-                    getStoreId(selectedCustomer);
+                    {
+                        getStoreId(selectedCustomer);
+                    }
                 }
 
                 //Insert item into baskets
                 else if (selectedNumber == 2) {
 //                    Scanner newInput = new Scanner(System.in);
-                    System.out.println("Please Enter your basket ID: ");
+                    System.out.print("Please Enter your basket ID: ");
                     answerBasketId = input.nextInt();
                     //Enter item into basket using basket key
                     if (basketUniqueID.containsKey(answerBasketId)) {
                         basket = new ArrayList<>();
-                        do {
-                            System.out.print("Enter Name of the item: ");
-                            String nameOfItem = input.next();
-                            System.out.print("Enter Quatity of item: ");
-                            int quantityOfItem = input.nextInt();
-                            basket.add(new StoreBasket().findAndAddItem(nameOfItem, quantityOfItem));
-                            System.out.println("Do you want to add more items: \nY yes \nN no");
-                            System.out.print("Enter:>>");
-                            answer = input.next().toUpperCase();
-                        } while (answer.equals("Y"));
+                        try {
+                            do {
+                                System.out.print("Enter Name of the item: ");
+                                String nameOfItem = input.next();
+                                System.out.print("Enter Quatity of item: ");
+                                int quantityOfItem = input.nextInt();
+                                basket.add(new StoreBasket().findAndAddItem(nameOfItem, quantityOfItem));
+                                System.out.println("Do you want to add more items: \nY yes \nN no");
+                                System.out.print("Enter:>>");
+                                answer = input.next().toUpperCase();
+                            } while (answer.equals("Y"));
+                        } catch (Exception e) {
+                            System.out.println("Try again");
+                        }
                     } else {
                         System.out.println("Basket not Available ");
                     }
                     linkBasket.put(answerBasketId, basket);
                     showItemPicked(answerBasketId);
                 }
+
                 //Romove Item from basket
                 else if (selectedNumber == 3) {
                     System.out.println("Please Enter your basket ID: ");
@@ -267,15 +282,21 @@ public class Main {
                 else if (selectedNumber == 5) {
                     getChristmasBonus();
 
-                } else if (selectedNumber == 6) {
-                    checkOut();
+                }
 
+                //Checkout
+                else if (selectedNumber == 6) {
+                    System.out.println("*******************");
+                    checkOut();
 
                 } else if (selectedNumber == 7) {
                     manager(loginUsers.get(0).getUserName());
 
 
                 } else if (selectedNumber == 0) {
+                    time();
+                    userTime();
+                    System.out.println("*******************");
                     System.exit(0);
                 } else {
                     System.out.println("Wrong Entry");
@@ -295,7 +316,7 @@ public class Main {
     public static void getChristmasBonus() {
         double total = 0;
         double discount = 0;
-        System.out.println("Please Enter your basket ID: ");
+        System.out.print("Please Enter your basket ID: ");
         answerBasketId = input.nextInt();
         if (linkBasket.containsKey(answerBasketId)) {
             total = new StoreBasket().calculateTotal(linkBasket.get(answerBasketId));
@@ -306,20 +327,25 @@ public class Main {
         }
         double netTotal = total - discount;
         System.out.println("Net Total after Discount = " + netTotal);
-        saveBonuses.put(answerBasketId, netTotal);
+
+        saveBonuses.put(answerBasketId, netTotal); //save netTotal after 10% discount is removed
     }
 
 
     //Remove item
     private static void removeItems(int answerBasketId) {
-        if (linkBasket.get(answerBasketId).size() == 0) {
-            System.out.println("Basket Empty");
-            return;
+        try {
+            if (linkBasket.get(answerBasketId).size() == 0) {
+                System.out.println("Basket Empty");
+                return;
+            }
+            System.out.print("Which Item you wish to remove? \nEnter by Item Number>> ");
+            int removeItem = input.nextInt();
+            linkBasket.get(answerBasketId).remove(removeItem - 1);
+            showItemPicked(answerBasketId);
+        } catch (Exception e) {
+            System.out.println("Wrong Entry");
         }
-        System.out.println("Which Item you wish to remove? \nEnter by Item Number>> ");
-        int removeItem = input.nextInt();
-        linkBasket.get(answerBasketId).remove(removeItem - 1);
-        showItemPicked(answerBasketId);
     }
 
 
@@ -372,37 +398,25 @@ public class Main {
     }
 
 
-//    private static double getNetAmount() {
-//        System.out.println("Please Enter your basket ID: ");
-//        answerBasketId = input.nextInt();
-//        if (linkBasket.containsKey(answerBasketId)) {
-//            linkBasket.get(answerBasketId);
-//        } else {
-//            System.out.println("Basket not found");
-//        }
-//
-//
-//
-//
-//        return netAmount;
-//    }
-
     //Create storeID
     public static void getStoreId(int selectedCustomer) {
+        try {
+            int getID = new StoreBasket().getBasketID();
+            basketUniqueID.put(getID, selectedCustomer);
+            System.out.println("\nBasket Created: ");
+            if (selectedCustomer == 1) {
+                System.out.println("Customer Type: Simple Customer" + "\nBasket ID:" + getID);
+            } else if (selectedCustomer == 2) {
+                System.out.println("Customer Type: Loyal Customer" + "\nBasket ID:" + getID);
+            } else if (selectedCustomer == 3) {
+                System.out.println("Customer Type: Employee Customer" + "\nBasket ID:" + getID);
+            } else {
+                System.out.println("You picked a wrong customer type");
+            }
 
-        int getID = new StoreBasket().getBasketID();
-        basketUniqueID.put(getID, selectedCustomer);
-        System.out.println("Basket Created: ");
-        if (selectedCustomer == 1) {
-            System.out.println("Customer Type: Simple Customer" + "\nBasket ID:" + getID);
-        } else if (selectedCustomer == 2) {
-            System.out.println("Customer Type: Loyal Customer" + "\nBasket ID:" + getID);
-        } else if (selectedCustomer == 3) {
-            System.out.println("Customer Type: Employee Customer" + "\nBasket ID:" + getID);
-        } else {
-            System.out.println("You picked a wrong customer type");
+        } catch (Exception e) {
+            System.out.println("Wrong Entry");
         }
-
     }
 
 
@@ -410,14 +424,12 @@ public class Main {
     public static void checkOut() {
         double bonus = 0;
 
-        System.out.println("Please Enter your basket ID: ");
+        System.out.print("Please Enter your basket ID: ");
         answerBasketId = input.nextInt();
 
-        showItemPicked(answerBasketId);
-        int bonusPoint = storeBasketBonuses(answerBasketId);
-
         if (linkBasket.containsKey(answerBasketId)) {
-
+            showItemPicked(answerBasketId);
+            int bonusPoint = storeBasketBonuses(answerBasketId);
             int customerType = basketUniqueID.get(answerBasketId);
             double total = saveBonuses.get(answerBasketId);
             System.out.println("Total Purchase: " + (total));
@@ -426,12 +438,10 @@ public class Main {
             } else if (customerType == 2) {
                 if (basketUniqueID.get(answerBasketId) == 2) {
                     if (bonusPoint >= 100) {
-
                         int numberOfBonusPoints = bonusPoint / 100;
                         for (int i = 1; i < numberOfBonusPoints; i++) {
                             bonus += 10;
                             System.out.println("Bonus Discount for next Purchase = " + bonus);
-
                         }
                     } else {
                         System.out.println("Bonus Discount for next Purchase = " + bonus);
@@ -463,7 +473,10 @@ public class Main {
     public static int storeBasketBonuses(int answerBasketId) {
         int type = basketUniqueID.get(answerBasketId);
         double total = new StoreBasket().calculateTotal(linkBasket.get(answerBasketId));
+
         total -= saveBonuses.get(answerBasketId);
+
+        //calculating customer points
         int discount = 0;
         if (type == 1) {
             discount = (int) total / 5;
@@ -503,6 +516,44 @@ public class Main {
 
     //Get manager or cashier information
     public static void getWorkerInfo() {
+
+    }
+
+    //user login time
+    public static void userTime() {
+        String dateStart = loginTime.get(0);
+        String dateStop = loginTime.get(1);
+        long overtime = 0;
+
+
+        // Custom date format
+        SimpleDateFormat format = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+        Date d1 = null;
+        Date d2 = null;
+        try {
+            d1 = format.parse(dateStart);
+            d2 = format.parse(dateStop);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        // Get msec from each, and subtract.
+        long diff = d2.getTime() - d1.getTime();
+
+
+        long days = TimeUnit.MILLISECONDS.toDays(diff);
+        long remainingHoursInMillis = diff - TimeUnit.DAYS.toMillis(days);
+        long hours = TimeUnit.MILLISECONDS.toHours(remainingHoursInMillis);
+        long remainingMinutesInMillis = remainingHoursInMillis - TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(remainingMinutesInMillis);
+        long remainingSecondsInMillis = remainingMinutesInMillis - TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(remainingSecondsInMillis);
+
+
+        System.out.println("Work Time: ");
+        System.out.println("Days: " + days + ", hours: " + hours + ", minutes: " + minutes + ", seconds: " + seconds);
+
 
     }
 }

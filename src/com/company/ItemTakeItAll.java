@@ -14,10 +14,6 @@ public class ItemTakeItAll extends Item implements calculate {
     public ItemTakeItAll() {
     }
 
-    public ItemTakeItAll(int numberOfItems) {
-        this.numberOfItems = numberOfItems;
-    }
-
     public int getNumberOfItems() {
         return numberOfItems;
     }
@@ -28,7 +24,6 @@ public class ItemTakeItAll extends Item implements calculate {
 
 
     //quatity of item bought
-
 
     public int getQuantity() {
         return quantity;
@@ -49,6 +44,6 @@ public class ItemTakeItAll extends Item implements calculate {
 
     @Override
     public void printInfo() {
-        System.out.println("Name: " + getName() + "\nPrice: " + getPrice() + "\nDiscounted Price: " + calculateDiscount());
+        System.out.println("Name: " + getName() + "\nPrice: " + getPrice() + "\nQuatity: " + getQuantity() + "\nDiscounted Price: " + calculateDiscount());
     }
 }
