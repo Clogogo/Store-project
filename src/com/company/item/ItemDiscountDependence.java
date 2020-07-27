@@ -1,4 +1,7 @@
-package com.company;
+package com.company.item;
+
+import com.company.store.StoreBasket;
+import com.company.utility.calculate;
 
 public class ItemDiscountDependence extends Item implements calculate {
     private int discountDependence = 200;

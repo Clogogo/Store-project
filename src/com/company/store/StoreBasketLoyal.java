@@ -1,4 +1,6 @@
-package com.company;
+package com.company.store;
+
+import com.company.store.StoreBasket;
 
 public class StoreBasketLoyal extends StoreBasket {
     private final int bonus = 5;

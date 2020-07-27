@@ -1,11 +1,17 @@
-package com.company;
+package com.company.item;
+
+import com.company.utility.calculate;
 
 public class Item implements calculate {
     private static int ID;
     private String name;
     private double price;
 
-    public Item(){};
+    public Item() {
+    }
+
+    ;
+
     public Item(String name, double price) {
         this.name = name;
         this.price = price;

@@ -1,4 +1,9 @@
-package com.company;
+package com.company.utility;
+
+import com.company.item.*;
+import com.company.user.User;
+import com.company.user.UserCashier;
+import com.company.user.UserManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,9 +1,13 @@
-package com.company;
+package com.company.item;
+
+import com.company.store.StoreBasket;
+import com.company.utility.calculate;
 
 public class ItemTakeItAll extends Item implements calculate {
     private int numberOfItems = 10;
     double discount;
-    int quantity = new StoreBasket().getItemQuantity();;
+    int quantity = new StoreBasket().getItemQuantity();
+    ;
 
 
     public ItemTakeItAll(String name, double price) {

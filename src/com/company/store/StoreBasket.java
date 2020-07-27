@@ -1,9 +1,10 @@
-package com.company;
+package com.company.store;
+
+import com.company.utility.InitialsOfItems;
+import com.company.item.*;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static com.company.Main.basket;
 
 public class StoreBasket {
     static int basketID;

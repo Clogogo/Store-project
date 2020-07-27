@@ -1,4 +1,7 @@
-package com.company;
+package com.company.item;
+
+import com.company.store.StoreBasket;
+import com.company.utility.calculate;
 
 public class ItemWithNODiscount extends Item implements calculate {
     private int quantity = new StoreBasket().getItemQuantity();
@@ -7,7 +10,11 @@ public class ItemWithNODiscount extends Item implements calculate {
         super(name, price);
 
     }
-    public ItemWithNODiscount(){};
+
+    public ItemWithNODiscount() {
+    }
+
+    ;
 
     public int getQuantity() {
         return quantity;

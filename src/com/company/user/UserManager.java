@@ -1,4 +1,6 @@
-package com.company;
+package com.company.user;
+
+import com.company.user.User;
 
 public class UserManager extends User {
     //    private int ID;

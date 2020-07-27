@@ -1,11 +1,11 @@
-package com.company;
+package com.company.item;
 
-public class ItemWithDiscount extends Item implements calculate{
+import com.company.store.StoreBasket;
+import com.company.utility.calculate;
+
+public class ItemWithDiscount extends Item implements calculate {
     private int discount = 50;
     private int quantity = new StoreBasket().getItemQuantity();
-
-
-
 
 
     public ItemWithDiscount(String name, double price) {

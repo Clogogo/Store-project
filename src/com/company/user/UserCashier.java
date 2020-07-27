@@ -1,9 +1,6 @@
-package com.company;
+package com.company.user;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import com.company.user.User;
 
 public class UserCashier extends User {
 

@@ -1,5 +1,12 @@
 package com.company;
 
+import com.company.item.*;
+import com.company.store.StoreBasket;
+import com.company.user.User;
+import com.company.user.UserCashier;
+import com.company.user.UserManager;
+import com.company.utility.InitialsOfItems;
+
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;

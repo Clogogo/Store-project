@@ -1,10 +1,14 @@
-package com.company;
+package com.company.item;
+
+import com.company.store.StoreBasket;
+import com.company.utility.calculate;
 
 public class ItemBuyMorePayless extends Item implements calculate {
     private int payLimitQuatity = 5;
     private int maximumOrder = 10;
     private int bonus = 2;
-    private int quantity  = new StoreBasket().getItemQuantity();;
+    private int quantity = new StoreBasket().getItemQuantity();
+    ;
 
 
     public ItemBuyMorePayless(String name, double price) {
@@ -14,9 +18,6 @@ public class ItemBuyMorePayless extends Item implements calculate {
 
     public ItemBuyMorePayless() {
     }
-
-    ;
-
 
     public int getBonus() {
         return bonus;
