@@ -207,23 +207,20 @@ public class Main {
 
     //Cashier feature
     public static void cashierFunction() {
+        int selectedNumber;
+        do {
+            try {
 
-        try {
-
-            boolean result = true;
-            String answer;
-            while (result) {
                 System.out.println("********************");
                 cashierMenu();
                 System.out.println("********************");
                 System.out.print("Enter>> ");
-                int selectedNumber = input.nextInt();
+                selectedNumber = input.nextInt();
                 System.out.println("*******************");
                 //create unique backet Id
                 if (selectedNumber == 1) {
                     System.out.println("\n1 for Simple Customer \n2 for Loyal Customer \n3 for Employee Customer \n");
                     System.out.print("Enter>> ");
-
                     int selectedCustomer = input.nextInt();
                     {
                         getStoreId(selectedCustomer);
@@ -232,36 +229,51 @@ public class Main {
 
                 //Insert item into baskets
                 else if (selectedNumber == 2) {
-//                    Scanner newInput = new Scanner(System.in);
+                    String nameOfItem;
+                    String answer;
+                    int quantityOfItem;
                     System.out.print("Please Enter your basket ID: ");
                     answerBasketId = input.nextInt();
+
                     //Enter item into basket using basket key
                     if (basketUniqueID.containsKey(answerBasketId)) {
+
                         basket = new ArrayList<>();
-                        try {
-                            do {
-                                System.out.print("Enter Name of the item: ");
-                                String nameOfItem = input.next();
-                                System.out.print("Enter Quatity of item: ");
-                                int quantityOfItem = input.nextInt();
-                                basket.add(new StoreBasket().findAndAddItem(nameOfItem, quantityOfItem));
-                                System.out.println("Do you want to add more items: \nY yes \nN no");
-                                System.out.print("Enter:>>");
-                                answer = input.next().toUpperCase();
-                            } while (answer.equals("Y"));
-                        } catch (Exception e) {
-                            System.out.println("Try again");
-                        }
+                        do {
+
+                            System.out.print("Enter Name of the item: ");
+                            nameOfItem = input.next();
+                            System.out.print("Enter Quatity of item: ");
+                            quantityOfItem = input.nextInt();
+                            basket.add(new StoreBasket().findAndAddItem(nameOfItem, quantityOfItem));
+                            System.out.println("*******************");
+                            System.out.println("Do you want to add more items: \nY yes \nN no");
+                            System.out.println("*******************");
+                            System.out.print("Enter:>> ");
+                            answer = input.next().toUpperCase();
+
+
+                            //add item to an non-empty basket
+                            if (linkBasket.containsKey(answerBasketId)) {
+                                for (Item s : basket
+                                ) {
+                                    linkBasket.get(answerBasketId).add(s);
+                                }
+                                //create and add item if basket is empty
+                            } else {
+                                linkBasket.put(answerBasketId, basket);
+
+                            }
+                            showItemPicked(answerBasketId);
+                        } while (answer.equals("Y"));
                     } else {
                         System.out.println("Basket not Available ");
                     }
-                    linkBasket.put(answerBasketId, basket);
-                    showItemPicked(answerBasketId);
                 }
 
-                //Romove Item from basket
+                //Remove Item from basket
                 else if (selectedNumber == 3) {
-                    System.out.println("Please Enter your basket ID: ");
+                    System.out.print("Please Enter your basket ID: ");
                     answerBasketId = input.nextInt();
                     if (linkBasket.containsKey(answerBasketId)) {
                         showItemPicked(answerBasketId);
@@ -293,7 +305,6 @@ public class Main {
 
                 //Checkout
                 else if (selectedNumber == 6) {
-                    System.out.println("*******************");
                     checkOut();
 
                 } else if (selectedNumber == 7) {
@@ -309,13 +320,16 @@ public class Main {
                     System.out.println("Wrong Entry");
                 }
 
+            } catch (
+                    Exception e) {
 
+                System.out.println("******************* \nWrong Entry!! Try Again");
+
+            } finally {
+                input.nextLine();
             }
-        } catch (
-                Exception e) {
-            System.out.println("Try Again");
-            cashierFunction();
-        }
+        } while (true);
+//        cashierFunction();
 
     }
 
@@ -352,6 +366,7 @@ public class Main {
             showItemPicked(answerBasketId);
         } catch (Exception e) {
             System.out.println("Wrong Entry");
+            e.printStackTrace();
         }
     }
 
@@ -545,7 +560,8 @@ public class Main {
             e.printStackTrace();
         }
 
-        // Get msec from each, and subtract.
+        // Get msecs from each, and subtract.
+        assert d2 != null;
         long diff = d2.getTime() - d1.getTime();
 
 

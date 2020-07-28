@@ -6,6 +6,7 @@ public class Item implements calculate {
     private static int ID;
     private String name;
     private double price;
+    private int quantity;
 
     public Item() {
     }
@@ -43,8 +44,13 @@ public class Item implements calculate {
     }
 
 
+    public int getQuantity() {
+        return quantity;
+    }
 
-
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     @Override
     public double calculateDiscount() {

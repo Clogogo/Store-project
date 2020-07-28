@@ -27,33 +27,6 @@ public class StoreBasket {
     private Map<Integer, Item> saveItemMap = new HashMap<>();
 
 
-//    public static void main(String[] args) {
-//        StoreBasket storeBasket = new StoreBasket(1000, 500, 5, "a3bjbaj", "kjdbajk");
-//
-//
-//        System.out.println("Enter the word: ");
-//        List<String> save = new ArrayList<>();
-//        Scanner input = new Scanner(System.in);
-//        String itemNameToFind = input.nextLine();
-//        System.out.println("Enter the word: ");
-//        String itemNameToFind1 = input.nextLine();
-//
-//        save.add(itemNameToFind);
-//        save.add(itemNameToFind1);
-//
-//        for (String s : save
-//        ) {
-//            storeBasket.findAndAddItem(s);
-//            System.out.println("*******************");
-//        }
-//        storeBasket.printInformationByID();
-//        storeBasket.removeItems();
-//        storeBasket.printInformationByID();
-//
-//
-//    }
-
-
     public StoreBasket(int VAT, String address, String date) {
         this.VAT = VAT;
         this.address = address;
@@ -78,7 +51,6 @@ public class StoreBasket {
 
     public Item findAndAddItem(String itemName, int quantity) {
 
-        try {
             itemQuantity = quantity;
             InitialsOfItems initials = new InitialsOfItems();
             myBasketList = new ArrayList<>();
@@ -119,9 +91,6 @@ public class StoreBasket {
                 }
             }
 
-        } catch (Exception e) {
-            System.out.println("Item not Found");
-        }
         return (myBasketList.get(0));
 
     }

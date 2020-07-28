@@ -17,7 +17,7 @@ public class InitialsOfItems {
         item[1] = new ItemBuyMorePayless("beans", 500);
         item[2] = new ItemWithDiscount("rice", 400);
         item[3] = new ItemTakeItAll("garri", 200);
-        item[4] = new ItemDiscountDependence("eya", 1000);
+        item[4] = new ItemDiscountDependence("potatoes", 1000);
         return new ArrayList<>(Arrays.asList(item));
     }
 
