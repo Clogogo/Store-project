@@ -8,12 +8,12 @@ Install java environment:
 java 15 
 ```
 
-#Testing
+# Testing
 To run tests
 ```
 Junit 
 ```
-#Building
+# Building
 ####Login
 
 username: manager 
